@@ -32,13 +32,14 @@ the result should be one of these:
 - [VBZS_JSONAddElement](docs/VBZS_JSONAddElement.md)
 - [VBZS_JSONColoring](docs/VBZS_JSONColoring.md)
 - [VBZS_JSONDelete](docs/VBZS_JSONDelete.md)
-- [VBZS_JSONLicenseInfo](docs/VBZS_JSONLicenseInfo.md)
 - [VBZS_JSONMerge](docs/VBZS_JSONMerge.md)
 - [VBZS_JSONMove](docs/VBZS_JSONMove.md)
 - [VBZS_JSONPrettyPrint](docs/VBZS_JSONPrettyPrint.md)
-- [VBZS_JSONRegister](docs/VBZS_JSONRegister.md)
 
-The plug-in also provides version and licensing functions. Registration documentation can be copied from the VBZS plug-in and adapted to the VBZS_JSON function names and license identity.
+The plug-in also provides version and licensing functions:
+- [VBZS_JSONLicenseInfo](docs/VBZS_JSONLicenseInfo.md)
+- [VBZS_JSONRegister](docs/VBZS_JSONRegister.md)
+- [VBZS_JSONVersion](docs/VBZS_JSONVersion.md)
 
 
 ## Design principles
