@@ -4,6 +4,29 @@ VBZS_JSON is a FileMaker plug-in with additional functions for creating, modifyi
 
 A key design goal is to preserve the original order of JSON object keys. This makes VBZS_JSON useful where FileMaker's built-in JSON functions change the key order or make order-preserving changes difficult.
 
+## Downloads
+
+You can [download the MacOS plugin directly here](Binairy/VBZS_JSON_fmplugin_macOS.zip), it's codesigned and notarized. 
+
+To download [the Windows version please use this link](Binairy/VBZS_JSON_fmx64_Windows.zip), codesigned.
+
+For Ubuntu separate versions for each architecture are available [one for Ubuntu 24.04 AMD/Intel](Binairy/VBZS_JSON_ubuntu_amd64.zip) and [the other for Ubuntu 24.04 ARM64](Binairy/VBZS_JSON_ubuntu_arm64.zip) 
+
+The current version is 0.9.5.0
+
+
+## Check your download
+
+Please use [the checksums provided in this file: SHA256SUMS](Binairy/SHA256SUMS) to check  any of the downloads, by placing the downloaded plugin and the [SHA256SUMS](Binairy/SHA256SUMS) in the same directory 
+
+and run a terminal/commandline with: ```sha256sum -c --ignore-missing SHA256SUMS``` 
+
+the result should be one of these: 
+```VBZS_JSON_fmplugin_macOS.zip: OK```
+```VBZS_JSON_fmx64_Windows.zip: OK``` 
+```VBZS_JSON_ubuntu_amd64.zip: OK```
+```VBZS_JSON_ubuntu_arm64.zip: OK```
+
 ## Functions
 
 - [VBZS_JSONAddElement](docs/VBZS_JSONAddElement.md)
@@ -16,6 +39,7 @@ A key design goal is to preserve the original order of JSON object keys. This ma
 - [VBZS_JSONRegister](docs/VBZS_JSONRegister.md)
 
 The plug-in also provides version and licensing functions. Registration documentation can be copied from the VBZS plug-in and adapted to the VBZS_JSON function names and license identity.
+
 
 ## Design principles
 
