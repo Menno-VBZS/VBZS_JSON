@@ -1,25 +1,25 @@
-# VBZS_Register
+# VBZS_JSONRegister
 
 ## Description
 
-`VBZS_Register` loads and activates a VBZS license for the current FileMaker session.
+`VBZS_JSONRegister` loads and activates a VBZS_JSON license for the current FileMaker session.
 
-The function validates a cryptographically signed VBZS license code and, when valid, makes the licensed VBZS functions immediately available.
+The function validates a cryptographically signed VBZS_JSON license code and, when valid, makes the licensed VBZS_JSON functions immediately available.
 
-Runtime registration is supported for all VBZS license types:
+Runtime registration is supported for all VBZS_JSON license types:
 
 - Standard
 - Developer
 - Enterprise
 
-A license loaded with `VBZS_Register` is held in memory. The function does not create or modify `license.json`.
+A license loaded with `VBZS_JSONRegister` is held in memory. The function does not create or modify `license.json`.
 
-For Developer and Enterprise licenses, `VBZS_Register` is the required registration method.
+For Developer and Enterprise licenses, `VBZS_JSONegister` is the required registration method.
 
 ## Syntax
 
 ```text
-VBZS_Register ( order ; licenseCode )
+VBZS_JSONRegister ( order ; licenseCode )
 ```
 
 ## Parameters
@@ -31,19 +31,19 @@ The order number belonging to the license.
 For example:
 
 ```text
-VBZS-2026-00127
+JSON-2026-00127
 ```
 
 The supplied order number must exactly match the order number contained in the signed license code.
 
 ### licenseCode
 
-The complete VBZS license code supplied with the license.
+The complete VBZS_JSON license code supplied with the license.
 
-A VBZS license code uses the following general format:
+A VBZS_JSON license code uses the following general format:
 
 ```text
-VBZS1.payload.signature
+VBZS_JSON1.payload.signature
 ```
 
 The license code contains cryptographically protected license information, including:
@@ -56,7 +56,7 @@ The license code contains cryptographically protected license information, inclu
 - license type;
 - number of licensed seats.
 
-The license code should always be passed to `VBZS_Register` unchanged.
+The license code should always be passed to `VBZS_JSONRegister` unchanged.
 
 ## Result
 
@@ -81,8 +81,8 @@ A failed registration does not remove or replace an already active valid license
 ## Example
 
 ```filemaker
-VBZS_Register (
-    "VBZS-2026-00127" ;
+VBZS_JSONRegister (
+    "JSON-2026-00127" ;
     $licenseCode
 )
 ```
@@ -90,7 +90,7 @@ VBZS_Register (
 When `$licenseCode` contains the valid license issued for order:
 
 ```text
-VBZS-2026-00127
+JSON-2026-00127
 ```
 
 the function returns:
@@ -107,7 +107,7 @@ No restart of FileMaker is required.
 
 # Runtime registration
 
-`VBZS_Register` creates a runtime registration.
+`VBZS_JSONRegister` creates a runtime registration.
 
 This means the validated license is stored in memory for the current FileMaker process.
 
@@ -117,7 +117,7 @@ When FileMaker Pro is closed, the runtime registration disappears.
 
 Likewise, a runtime registration on FileMaker Server disappears when the relevant FileMaker Server process or service is restarted.
 
-The solution should therefore execute `VBZS_Register` again when a new runtime session begins if the license depends on runtime registration.
+The solution should therefore execute `VBZS_JSONRegister` again when a new runtime session begins if the license depends on runtime registration.
 
 ---
 
@@ -134,12 +134,12 @@ license.json
 or:
 
 ```filemaker
-VBZS_Register ( order ; licenseCode )
+VBZS_JSONRegister ( order ; licenseCode )
 ```
 
-When a Standard License is registered using `VBZS_Register`, it behaves as a runtime license for that session.
+When a Standard License is registered using `VBZS_JSONRegister`, it behaves as a runtime license for that session.
 
-`VBZS_Register` itself never writes or modifies `license.json`.
+`VBZS_JSONRegister` itself never writes or modifies `license.json`.
 
 ## Developer License
 
@@ -148,14 +148,14 @@ A Developer License may only be activated through runtime registration.
 Use:
 
 ```filemaker
-VBZS_Register ( order ; licenseCode )
+VBZS_JSONRegister ( order ; licenseCode )
 ```
 
-A Developer License is intended for a developer who distributes VBZS as part of a FileMaker solution.
+A Developer License is intended for a developer who distributes VBZS_JSON as part of a FileMaker solution.
 
 The license is valid for the licensed number of seats, up to the applicable Developer License limit.
 
-The FileMaker solution should execute `VBZS_Register` whenever a new session requires the license.
+The FileMaker solution should execute `VBZS_JSONRegister` whenever a new session requires the license.
 
 A Developer License cannot be activated automatically from `license.json`.
 
@@ -166,12 +166,12 @@ An Enterprise License may only be activated through runtime registration.
 Use:
 
 ```filemaker
-VBZS_Register ( order ; licenseCode )
+VBZS_JSONRegister ( order ; licenseCode )
 ```
 
 An Enterprise License is not loaded from `license.json`.
 
-The FileMaker solution should execute `VBZS_Register` whenever a new session requires the license.
+The FileMaker solution should execute `VBZS_JSONRegister` whenever a new session requires the license.
 
 ---
 
@@ -184,7 +184,7 @@ A local `license.json` file is not used for Server registration.
 A server-side solution should therefore execute:
 
 ```filemaker
-VBZS_Register ( order ; licenseCode )
+VBZS_JSONRegister ( order ; licenseCode )
 ```
 
 as part of its initialization process.
@@ -200,7 +200,7 @@ If FileMaker Pro starts with a valid Standard License loaded from `license.json`
 A subsequent successful call to:
 
 ```filemaker
-VBZS_Register ( order ; licenseCode )
+VBZS_JSONRegister ( order ; licenseCode )
 ```
 
 replaces the active license in memory for the remainder of that session.
@@ -216,7 +216,7 @@ FileMaker Pro starts
 Later:
 
 ```text
-VBZS_Register receives another valid license
+VBZS_JSONRegister receives another valid license
 → Source: Runtime
 ```
 
@@ -236,7 +236,7 @@ For example:
 
 ```text
 valid Standard License active
-→ invalid VBZS_Register call
+→ invalid VBZS_JSONRegister call
 → Standard License remains active
 ```
 
@@ -244,7 +244,7 @@ Likewise:
 
 ```text
 valid Runtime License active
-→ invalid VBZS_Register call
+→ invalid VBZS_JSONRegister call
 → existing Runtime License remains active
 ```
 
@@ -254,17 +254,17 @@ The new license is only installed in memory after all required validation has su
 
 # Validation
 
-Before a license is accepted, VBZS validates the license code.
+Before a license is accepted, VBZS_JSON validates the license code.
 
 The validation includes:
 
-1. Recognizing the VBZS license-code format.
+1. Recognizing the VBZS_JSON license-code format.
 2. Decoding the signed payload.
 3. Verifying the RSA/SHA-512 digital signature.
 4. Parsing the protected license information.
-5. Confirming that the license belongs to VBZS.
+5. Confirming that the license belongs to VBZS_JSON.
 6. Comparing the supplied order number with the signed order number.
-7. Verifying that the license generation is valid for the installed VBZS version.
+7. Verifying that the license generation is valid for the installed VBZS_JSON version.
 
 Only after these checks succeed is the license made active.
 
@@ -272,16 +272,16 @@ Only after these checks succeed is the license made active.
 
 # License generation
 
-VBZS licenses contain an internal license generation number.
+VBZS_JSON licenses contain an internal license generation number.
 
-This generation is independent of the normal VBZS software version.
+This generation is independent of the normal VBZS_JSON software version.
 
-For example, several VBZS releases may all use license generation 1:
+For example, several VBZS_JSON releases may all use license generation 1:
 
 ```text
-VBZS 0.9.4.1 → generation 1
-VBZS 0.9.5.0 → generation 1
-VBZS 1.0.0.0 → generation 1
+VBZS_JSON 0.9.4.1 → generation 1
+VBZS_JSON 0.9.5.0 → generation 1
+VBZS_JSON 1.0.0.0 → generation 1
 ```
 
 A later commercial release may intentionally require:
@@ -290,7 +290,7 @@ A later commercial release may intentionally require:
 generation 2
 ```
 
-A newer license may always be used with a VBZS release requiring an older generation.
+A newer license may always be used with a VBZS_JSON release requiring an older generation.
 
 For example:
 
@@ -308,7 +308,7 @@ Generation 2 required
 → invalid
 ```
 
-License generation is an internal VBZS licensing mechanism and does not need to be managed by the FileMaker solution.
+License generation is an internal VBZS_JSON licensing mechanism and does not need to be managed by the FileMaker solution.
 
 ---
 
@@ -330,13 +330,13 @@ without generating a new valid signature makes the license code invalid.
 
 The FileMaker solution does not need to verify these values separately.
 
-VBZS performs the cryptographic verification internally.
+VBZS_JSON performs the cryptographic verification internally.
 
 ---
 
 # Recommended solution initialization
 
-For Developer and Enterprise licenses, a solution can register VBZS from an initialization script.
+For Developer and Enterprise licenses, a solution can register VBZS_JSON from an initialization script.
 
 For example:
 
@@ -344,7 +344,7 @@ For example:
 Set Variable [
     $registered ;
     Value:
-        VBZS_Register (
+        VBZS_JSONRegister (
             Settings::VBZSOrder ;
             Settings::VBZSLicenseCode
         )
@@ -355,9 +355,9 @@ The result can then be tested:
 
 ```filemaker
 If [ $registered = 1 ]
-    # VBZS registration succeeded
+    # VBZS_JSON registration succeeded
 Else
-    # VBZS registration was not accepted
+    # VBZS_JSON registration was not accepted
 End If
 ```
 
@@ -367,14 +367,14 @@ The registration data may be stored in a location appropriate to the solution's 
 
 # Relationship with the trial period
 
-When no valid license is available, VBZS operates in trial mode.
+When no valid license is available, VBZS_JSON operates in trial mode.
 
-When the trial period expires, licensed VBZS functions are no longer executed.
+When the trial period expires, licensed VBZS_JSON functions are no longer executed.
 
 A successful call to:
 
 ```filemaker
-VBZS_Register ( order ; licenseCode )
+VBZS_JSONRegister ( order ; licenseCode )
 ```
 
 immediately activates the license.
@@ -383,17 +383,17 @@ Licensed functions can then be used again without restarting FileMaker.
 
 ---
 
-# Relationship with VBZS_LicenseInfo
+# Relationship with VBZS_JSONLicenseInfo
 
 After registration, use:
 
 ```filemaker
-VBZS_LicenseInfo
+VBZS_JSONLicenseInfo
 ```
 
 to retrieve information about the active license.
 
-A license loaded using `VBZS_Register` is reported with:
+A license loaded using `VBZS_JSONRegister` is reported with:
 
 ```text
 Source: Runtime
@@ -403,10 +403,10 @@ Source: Runtime
 
 # Notes
 
-- Registration is performed entirely by VBZS.
+- Registration is performed entirely by VBZS_JSON.
 - A successful registration takes effect immediately.
-- `VBZS_Register` does not require a FileMaker restart.
-- `VBZS_Register` does not write `license.json`.
+- `VBZS_JSONRegister` does not require a FileMaker restart.
+- `VBZS_JSONRegister` does not write `license.json`.
 - Standard, Developer, and Enterprise licenses may all be registered at runtime.
 - Developer and Enterprise licenses require runtime registration.
 - FileMaker Server uses runtime registration only.
@@ -414,10 +414,10 @@ Source: Runtime
 - Runtime registration has priority over a previously loaded file-based license.
 - Runtime registration lasts until the FileMaker process or relevant Server process ends.
 - The license code must not be modified.
-- The private key used to issue VBZS licenses is not present in the plug-in.
-- VBZS contains only the public information required to verify authentic licenses.
+- The private key used to issue VBZS_JSON licenses is not present in the plug-in.
+- VBZS_JSON contains only the public information required to verify authentic licenses.
 
 ## See also
 
-- `VBZS_LicenseInfo`
-- `VBZS_Version`
+- `VBZS_JSONLicenseInfo`
+- `VBZS_JSONVersion`
